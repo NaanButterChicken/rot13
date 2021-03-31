@@ -28,21 +28,17 @@ app.get('/encrypt', (request, response)  => {
 
     for(var n=0; n < plaintext.length; n++) {
         
-        var beans = plaintext.charCodeAt(n);
-            //haha im making up code and if it works im gonna be very happy
-            //update- it didnt work :( --var beans = str.charCodeAt(plaintext.length);
-            //update 2- that works but not quite what i wanted -- var beans = plaintext.charCodeAt(0);
-            //update 3- that gives me a result but its NaN so thats great -- var beans = plaintext.charCodeAt(plaintext.lenght);
-            //update 4- this one gives me the last character in the string -- var beans = plaintext.charCodeAt(n);
+        var beans = plaintext.charCodeAt(n) + 96;
+                //technically i would rather subtract 96 to make a=1. doing this gets me actual characters though so this is what we do
+
         console.log(beans);
         var shift = 13;
-        var shiftedBeans = (beans + shift) - 96;
-        console.log(shiftedBeans);
-            //**mod26 this
-            //**subtract a's charcode from everthing to make life easier
-        ciphertext += String.fromCharCode(shiftedBeans);
+        var shiftedBeans = (beans + shift);
 
-        //console.log(ciphertext);
+
+        console.log(shiftedBeans);
+        //**mod26 this
+        ciphertext += String.fromCharCode(shiftedBeans);
         //** a=97 z=122
     }
 
