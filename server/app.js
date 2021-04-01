@@ -28,18 +28,21 @@ app.get('/encrypt', (request, response)  => {
 
     for(var n=0; n < plaintext.length; n++) {
         
-        var beans = plaintext.charCodeAt(n) + 96;
-                //technically i would rather subtract 96 to make a=1. doing this gets me actual characters though so this is what we do
+        var beans = plaintext.charCodeAt(n) - 97;
+        //technically i would rather subtract 96 to make a=1. doing this gets me actual characters though so this is what we do
+
 
         console.log(beans);
         var shift = 13;
-        var shiftedBeans = (beans + shift);
+        //was 13. now it makes the first half of the alphabet shift 13 but the later half has the fUnKy cHarAcTeRs
+        var shiftedBeans = (beans + shift)%26;
 
 
         console.log(shiftedBeans);
-        //**mod26 this
-        ciphertext += String.fromCharCode(shiftedBeans);
+        ciphertext += String.fromCharCode(shiftedBeans+97);
         //** a=97 z=122
+        //console.log(ciphertext);
+        console.log(" ");
     }
 
     response.status(200).send(ciphertext);
